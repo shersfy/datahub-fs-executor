@@ -5,7 +5,6 @@ import javax.annotation.PostConstruct;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.ipc.RPC;
 import org.shersfy.datahub.fs.executor.config.RPCServerConfig;
-import org.shersfy.datahub.fs.protocols.FsStreamService;
 import org.shersfy.datahub.fs.protocols.StandardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,8 +22,8 @@ public class RPCServer {
     @Autowired
     private StandardService standardService;
     
-    @Autowired
-    private FsStreamService fsStreamService;
+//    @Autowired
+//    private FsStreamService fsStreamService;
     
     @PostConstruct
     protected void init() {
@@ -40,14 +39,14 @@ public class RPCServer {
             logger.info("IPC Server started host {} listener on {}", config.getHost(), config.getPort());
             
             // FsStreamService
-            new RPC.Builder(new Configuration(false))
-            .setBindAddress(config.getFsServiceHost())
-            .setPort(config.getFsServicePort())
-            .setProtocol(FsStreamService.class)
-            .setInstance(fsStreamService)
-            .build()
-            .start();
-            logger.info("IPC Server started host {} listener on {}", config.getFsServiceHost(), config.getFsServicePort());
+//            new RPC.Builder(new Configuration(false))
+//            .setBindAddress(config.getFsServiceHost())
+//            .setPort(config.getFsServicePort())
+//            .setProtocol(FsStreamService.class)
+//            .setInstance(fsStreamService)
+//            .build()
+//            .start();
+//            logger.info("IPC Server started host {} listener on {}", config.getFsServiceHost(), config.getFsServicePort());
         } catch (Exception e) {
             logger.error("", e);
         }
