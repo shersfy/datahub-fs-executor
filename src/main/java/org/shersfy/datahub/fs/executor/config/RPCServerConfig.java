@@ -1,6 +1,5 @@
-package org.shersfy.datahub.fsexecutor.config;
+package org.shersfy.datahub.fs.executor.config;
 
-import org.shersfy.datahub.commons.utils.LocalHostUtil;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,13 +8,13 @@ import org.springframework.context.annotation.Configuration;
 public class RPCServerConfig {
     
     /**rpc server普通服务host, 默认本机IP*/
-    private String host = LocalHostUtil.IP;
+    private String host = "localhost";
     
     /**rpc server普通服务端口, 默认8899 */
     private int port = 8899;
     
     /**rpc server FileSystem服务host, 默认本机IP*/
-    private String fsServiceHost = LocalHostUtil.IP;
+    private String fsServiceHost = "localhost";
     
     /**rpc server FileSystem服务端口, 默认8877 */
     private int fsServicePort = 8877;

@@ -1,10 +1,12 @@
 package org.shersfy.datahub.fs.executor.service;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.ipc.RPC;
+import org.shersfy.datahub.fs.executor.config.RPCServerConfig;
 import org.shersfy.datahub.fs.protocols.FsStreamService;
 import org.shersfy.datahub.fs.protocols.StandardService;
-import org.shersfy.datahub.fsexecutor.config.RPCServerConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ public class RPCServer {
     @Autowired
     private FsStreamService fsStreamService;
     
+    @PostConstruct
     protected void init() {
         try {
             // StandardService
@@ -34,6 +37,7 @@ public class RPCServer {
             .setInstance(standardService)
             .build()
             .start();
+            logger.info("IPC Server started host {} listener on {}", config.getHost(), config.getPort());
             
             // FsStreamService
             new RPC.Builder(new Configuration(false))
@@ -43,6 +47,7 @@ public class RPCServer {
             .setInstance(fsStreamService)
             .build()
             .start();
+            logger.info("IPC Server started host {} listener on {}", config.getFsServiceHost(), config.getFsServicePort());
         } catch (Exception e) {
             logger.error("", e);
         }

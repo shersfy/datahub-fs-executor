@@ -96,6 +96,7 @@ public class FsStreamServiceImpl implements FsStreamService{
         
         try {
             output.write(bytes.getBytes(), 0, bytes.getLength());
+            output.flush();
         } catch (Exception e) {
             logger.error("", e);
         }
