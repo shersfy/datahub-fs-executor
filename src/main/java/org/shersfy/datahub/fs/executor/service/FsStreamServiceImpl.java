@@ -59,8 +59,9 @@ public class FsStreamServiceImpl implements FsStreamService{
     public BooleanWritable createNewFile(Text path) {
         BooleanWritable res = new BooleanWritable(true);
         try {
-            output = fs.create(new Path(path.toString()), true);
-        } catch (IllegalArgumentException | IOException e) {
+            String user = System.getProperty(HdfsUtil.HADOOP_USER_NAME);
+            output = HdfsUtil.createHdfsFile(fs, path.toString(), user);
+        } catch (Exception e) {
             logger.error("", e);
             res.set(false);
         }
