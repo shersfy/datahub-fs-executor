@@ -1,0 +1,22 @@
+version: v1.0.0
+server:
+  port: 80
+spring:
+  application:
+    name: datahub-fs-executor
+  main:
+    banner-mode: 'off'
+# RPC
+rpc:
+  server:
+    port: 8899
+    fs-service-port: 8877
+
+# logging
+logging:
+  file: logs/${spring.application.name}.log
+  level:
+    root: info
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss.SSS
+    level: '%5p'
