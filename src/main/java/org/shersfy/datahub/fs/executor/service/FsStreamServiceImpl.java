@@ -90,6 +90,17 @@ public class FsStreamServiceImpl implements FsStreamService{
         }
         return res;
     }
+    
+    @Override
+    public void write(BytesWritable bytes) {
+        
+        try {
+            output.write(bytes.getBytes(), 0, bytes.getLength());
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+        
+    }
 
     @Override
     public IntWritable read(BytesWritable bytes) {
@@ -111,5 +122,6 @@ public class FsStreamServiceImpl implements FsStreamService{
     public void closeOutputStream() {
         IOUtils.closeQuietly(output);
     }
+
 
 }
